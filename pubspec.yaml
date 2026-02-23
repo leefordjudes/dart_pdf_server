@@ -10,6 +10,8 @@ environment:
 # Add regular dependencies here.
 dependencies:
   args: ^2.7.0
+  collection: ^1.19.1
+  pdf: ^3.11.3
   dart_pdf:
     git:
       url: https://github.com/auditplus/dart_pdf.git

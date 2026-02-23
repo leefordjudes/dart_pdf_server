@@ -7,27 +7,25 @@ import 'package:args/args.dart';
 
 void main(List<String> arguments) async {
   final parser = ArgParser()
+    ..addOption('mode', abbr: 'm')
     ..addOption('template', abbr: 't')
     ..addOption('data', abbr: 'd');
   final args = parser.parse(arguments);
-  final b64template = args.option('template') ?? '';
-  final data = args.option('data') ?? '';
+  final mode = args.option('mode') ?? 'pdf'; // pdf or label
+  final b64templatePath = args.option('template') ?? '';
+  final dataPath = args.option('data') ?? '';
+  final b64template = await File(b64templatePath).readAsString();
+  final data = await File(dataPath).readAsString();
   List<int> b64bytes = base64.decode(b64template);
   String template = utf8.decode(b64bytes);
 
-  final pdfBytes = await server.generatePdf(template, data);
-  print('dart len: ${pdfBytes.length}');
-  // String base64String = base64.encode(pdfBytes);
-  // stdout.writeAll([base64String]);
-  // stdout.writeAll(pdfBytes);
+  final pdfBytes = switch (mode) {
+    "label" => await server.generateLabel(template, data),
+    _ => await server.generatePdf(template, data),
+  };
+
   stdout.add(pdfBytes);
   await stdout.flush();
-
-  // List<int> bytes = utf8.encode(data);
-  // String out = utf8.decode(bytes);
-  // print(out);
-  // stdout.writeAll(pdfBytes);
-  // return bytes;
 }
 
 /*
