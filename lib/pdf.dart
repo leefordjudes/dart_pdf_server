@@ -14,9 +14,21 @@ Future<Uint8List> generatePdf(String template, String data) async {
   ByteData courierRegular = ByteData.sublistView(courierPrimeRegularBytes);
   final courierPrimeBoldBytes = File('$fontPath/CourierPrime-Bold.ttf').readAsBytesSync();
   ByteData courierBold = ByteData.sublistView(courierPrimeBoldBytes);
+  final antonioRegularBytes = File('$fontPath/Antonio-Regular.ttf').readAsBytesSync();
+  ByteData antonioRegular = ByteData.sublistView(antonioRegularBytes);
+  final antonioBoldBytes = File('$fontPath/Antonio-Bold.ttf').readAsBytesSync();
+  ByteData antonioBold = ByteData.sublistView(antonioBoldBytes);
+  final helveticaRegularBytes = File('$fontPath/Helvetica-Regular.ttf').readAsBytesSync();
+  ByteData helveticaRegular = ByteData.sublistView(helveticaRegularBytes);
+  final helveticaBoldBytes = File('$fontPath/Helvetica-Bold.ttf').readAsBytesSync();
+  ByteData helveticaBold = ByteData.sublistView(helveticaBoldBytes);
 
   dp.PdfContext.instance.addFont('CourierPrime', 'Regular', courierRegular);
   dp.PdfContext.instance.addFont('CourierPrime', 'Bold', courierBold);
+  dp.PdfContext.instance.addFont('Antonio', 'Regular', antonioRegular);
+  dp.PdfContext.instance.addFont('Antonio', 'Bold', antonioBold);
+  dp.PdfContext.instance.addFont('HelveticaPrime', 'Regular', helveticaRegular);
+  dp.PdfContext.instance.addFont('HelveticaPrime', 'Bold', helveticaBold);
 
   final yamlDoc = dp.Document.fromYaml(template);
   final doc = await yamlDoc.save(dp.PdfContext.instance, jsonDecode(data));
@@ -33,9 +45,21 @@ Future<Uint8List> generateLabel(String templateStr, String dataStr) async {
   ByteData courierRegular = ByteData.sublistView(courierPrimeRegularBytes);
   final courierPrimeBoldBytes = File('$fontPath/CourierPrime-Bold.ttf').readAsBytesSync();
   ByteData courierBold = ByteData.sublistView(courierPrimeBoldBytes);
+  final antonioRegularBytes = File('$fontPath/Antonio-Regular.ttf').readAsBytesSync();
+  ByteData antonioRegular = ByteData.sublistView(antonioRegularBytes);
+  final antonioBoldBytes = File('$fontPath/Antonio-Bold.ttf').readAsBytesSync();
+  ByteData antonioBold = ByteData.sublistView(antonioBoldBytes);
+  final helveticaRegularBytes = File('$fontPath/Helvetica-Regular.ttf').readAsBytesSync();
+  ByteData helveticaRegular = ByteData.sublistView(helveticaRegularBytes);
+  final helveticaBoldBytes = File('$fontPath/Helvetica-Bold.ttf').readAsBytesSync();
+  ByteData helveticaBold = ByteData.sublistView(helveticaBoldBytes);
 
   dp.PdfContext.instance.addFont('CourierPrime', 'Regular', courierRegular);
   dp.PdfContext.instance.addFont('CourierPrime', 'Bold', courierBold);
+  dp.PdfContext.instance.addFont('Antonio', 'Regular', antonioRegular);
+  dp.PdfContext.instance.addFont('Antonio', 'Bold', antonioBold);
+  dp.PdfContext.instance.addFont('HelveticaPrime', 'Regular', helveticaRegular);
+  dp.PdfContext.instance.addFont('HelveticaPrime', 'Bold', helveticaBold);
 
   final Map<String, dynamic> temp = Map<String, dynamic>.from(jsonDecode(templateStr));
   List<Map<String, dynamic>> data = List.from(jsonDecode(dataStr)).cast();
